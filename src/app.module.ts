@@ -11,6 +11,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env' }),
     TypeOrmModule.forRoot({
+      type: 'postgres',
       url: process.env.DATABASE_URL,
     }),
     TypeOrmModule.forFeature([LottoStores]),
