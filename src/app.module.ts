@@ -1,6 +1,6 @@
 import { Module, OnApplicationBootstrap } from '@nestjs/common';
 import { DataSource } from 'typeorm';
-import { databaseConfig } from './config/database.config';
+// import { databaseConfig } from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LottoStores } from './entity/LottoStores.entity';
 import { LottoStoreService } from './lotto-store.service';
@@ -10,9 +10,8 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env' }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: databaseConfig,
+    TypeOrmModule.forRoot({
+      url: process.env.DATABASE_URL,
     }),
     TypeOrmModule.forFeature([LottoStores]),
   ],
